@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamSleep - Camas e Colchões</title>
+    <style>
+        /* RESET E VARIAVEIS */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --light: #f8f9fa;
+            --dark: #333;
+            --gray: #666;
+        }
+
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+
+        /* HEADER */
+        header { background: var(--primary); color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .logo h1 { font-size: 1.8rem; letter-spacing: 1px; }
+        .logo p { font-size: 0.8rem; opacity: 0.8; }
+
+        /* BANNER */
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1505693419173-42b9258a6359?auto=format&fit=crop&q=80&w=1470') center/cover; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 20px; }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .payment-notice-banner { background: var(--accent); color: #000; padding: 10px 20px; font-weight: bold; border-radius: 5px; margin-top: 20px; animation: pulse 2s infinite; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* PRODUTOS */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
+        .price { font-size: 1.5rem; font-weight: bold; color: var(--secondary); margin-bottom: 15px; }
+        .btn-buy { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background 0.3s; width: 100%; margin-top: auto; }
+        .btn-buy:hover { background: #0d1a4d; }
+        .btn-buy:active { transform: scale(0.98); }
+
+        /* SOBRE E PAGAMENTO */
+        .info-section { background: #fff; padding: 60px 20px; margin-top: 40px; }
+        .info-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .info-box h3 { color: var(--primary); margin-bottom: 15px; }
+        .payment-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 10px 15px; border-radius: 5px; font-weight: bold; border: 1px solid #2e7d32; margin-top: 10px; }
+
+        /* MODAL */
+        #modalOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal { background: white; padding: 30px; border-radius: 10px; max-width: 500px; width: 90%; position: relative; }
+        .modal h2 { margin-bottom: 20px; color: var(--primary); }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; font-size: 1.5rem; font-weight: bold; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .modal-footer { margin-top: 20px; text-align: center; }
+        .warning-text { color: var(--secondary); font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; }
+
+        /* FOOTER */
+        footer { background: var(--dark); color: white; padding: 40px 20px; text-align: center; margin-top: 40px; }
+        .footer-content p { margin: 5px 0; opacity: 0.8; }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>DreamSleep</h1>
+            <p>Conforto real para o seu sono</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>As Melhores Camas e Colchões</h2>
+        <p>Qualidade premium com entrega rápida em toda a região.</p>
+        <div class="payment-notice-banner">Pague somente ao receber em casa! 🚚</div>
+    </section>
+
+    <main class="container">
+        <div class="section-title">
+            <h2>Nossos Produtos</h2>
+            <p>Escolha o conforto ideal para você</p>
+        </div>
+
+        <div class="grid-products">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1505693357370-58c01c37451c?auto=format&fit=crop&q=80&w=500" alt="Cama Casal">
+                <div class="card-body">
+                    <h3 class="card-title">Cama Casal Premium</h3>
+                    <p class="price">R$ 1.299,00</p>
+                    <button class="btn-buy" onclick="openOrder('Cama Casal Premium')">Comprar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=500" alt="Cama Queen">
+                <div class="card-body">
+                    <h3 class="card-title">Cama Queen Size Luxo</h3>
+                    <p class="price">R$ 1.850,00</p>
+                    <button class="btn-buy" onclick="openOrder('Cama Queen Size Luxo')">Comprar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=500" alt="Cama Solteiro">
+                <div class="card-body">
+                    <h3 class="card-title">Cama Solteiro Moderna</h3>
+                    <p class="price">R$ 799,00</p>
+                    <button class="btn-buy" onclick="openOrder('Cama Solteiro Moderna')">Comprar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=500" alt="Beliche">
+                <div class="card-body">
+                    <h3 class="card-title">Beliche Reforçada</h3>
+                    <p class="price">R$ 1.100,00</p>
+                    <button class="btn-buy" onclick="openOrder('Beliche Reforçada')">Comprar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=500" alt="Colchão">
+                <div class="card-body">
+                    <h3 class="card-title">Colchão Ortopédico King</h3>
+                    <p class="price">R$ 2.400,00</p>
+                    <button class="btn-buy" onclick="openOrder('Colchão Ortopédico King')">Comprar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1621293954908-d811495bb191?auto=format&fit=crop&q=80&w=500" alt="Cama Box">
+                <div class="card-body">
+                    <h3 class="card-title">Cama Box Baú Casal</h3>
+                    <p class="price">R$ 1.590,00</p>
+                    <button class="btn-buy" onclick="openOrder('Cama Box Baú Casal')">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="info-section">
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Sobre a DreamSleep</h3>
+                <p>Com mais de 10 anos de mercado, somos especialistas em proporcionar a melhor noite de sono para sua família. Trabalhamos com materiais de alta durabilidade e design contemporâneo.</p>
+            </div>
+            <div class="info-box">
+                <h3>Formas de Pagamento</h3>
+                <p>Valorizamos a sua segurança. Por isso, não solicitamos dados de cartão pelo site.</p>
+                <div class="payment-badge">Pagamento somente no ato da entrega</div>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Aceitamos: Dinheiro, PIX e Cartões de Débito/Crédito.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p><strong>DreamSleep Móveis Ltda.</strong></p>
+            <p>Rua do Descanso, 123 - Centro, São Paulo - SP</p>
+            <p>WhatsApp: (11) 99999-9999 | Email: contato@dreamsleep.com</p>
+            <p style="margin-top: 20px; font-size: 0.7rem; opacity: 0.5;">© 2026 DreamSleep - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="modalOverlay">
+        <div class="modal">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="productNameModal">Finalizar Pedido</h2>
+            <p class="warning-text">⚠️ Lembramos: O pagamento será realizado apenas na entrega.</p>
+            
+            <form id="orderForm">
+                <input type="hidden" id="selectedProduct">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" required placeholder="Digite seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone / WhatsApp</label>
+                    <input type="tel" id="phone" required placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="address">Endereço de Entrega</label>
+                    <textarea id="address" required rows="3" placeholder="Rua, número, bairro e cidade"></textarea>
+                </div>
+                <button type="submit" class="btn-buy">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const orderForm = document.getElementById('orderForm');
+        const productNameModal = document.getElementById('productNameModal');
+
+        // Abrir Modal
+        function openOrder(product) {
+            document.getElementById('selectedProduct').value = product;
+            productNameModal.innerText = "Pedido: " + product;
+            modalOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+        }
+
+        // Fechar Modal
+        function closeModal() {
+            modalOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar se clicar fora do modal
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        // Envio do Formulário
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validação simples
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const product = document.getElementById('selectedProduct').value;
+
+            if (name.length < 3) {
+                alert("Por favor, insira seu nome completo.");
+                return;
+            }
+
+            if (phone.length < 8) {
+                alert("Por favor, insira um telefone válido.");
+                return;
+            }
+
+            // Simulação de Sucesso
+            const msg = `Obrigado, ${name}!\n\nSeu pedido de "${product}" foi registrado com sucesso.\n\nNossa equipe entrará em contato em breve pelo telefone ${phone} para confirmar o horário da entrega.\n\nRELEMBRANDO: O pagamento de R$ ${document.querySelector('.price').innerText.replace('R$ ', '')} será feito apenas no ATO DA ENTREGA.`;
+            
+            alert(msg);
+            
+            // Limpa e fecha
+            orderForm.reset();
+            closeModal();
+        });
+    </script>
+</body>
+</html>
